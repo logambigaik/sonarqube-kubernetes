@@ -7,25 +7,16 @@ Encode USERNAME and PASSWORD of Postgres using following commands:
 Create the Secret using kubectl apply:
 -------
     kubectl apply -f postgres-secrets.yml
-Check secrets:
--------
-    kubectl get secrets
+
 Create PV and PVC for Postgres using yaml file:
 -----
     kubectl apply -f postgres-storage.yaml
-Check pv and pvc:
-----
-    kubectl get pv
-    kubectl get pvc
+
 Deploying Postgres with kubectl apply:
 -----------
     kubectl apply -f postgres-deployment.yaml
     kubectl apply -f postgres-service.yaml
-Check Deployments, Pods and Services:
--------
-    kubectl get deploy
-    kubectl get pods
-    kubectl get svc
+
 Create PV and PVC for Sonarqube:
 -------------
     kubectl apply -f sonar-pv-data.yml
@@ -39,6 +30,15 @@ Deploy Sonarqube:
 -------------
     kubectl apply -f sonar-deployment.yml
     kubectl apply -f sonar-service.yml
+Check secrets:
+-------
+    kubectl get secrets
+    kubectl get configmaps
+    kubectl get pv
+    kubectl get pvc
+    kubectl get deploy
+    kubectl get pods
+    kubectl get svc
     
 Now Goto Loadbalancer and check whether service comes Inservice or not, If it comes Inservice copy DNS Name of Loadbalancer and check in web UI
 
@@ -46,3 +46,12 @@ Default Credentials for Sonarqube:
 -------
     UserName: admin
     PassWord: admin
+    
+Now we can cleanup by using below commands:
+--------
+    kubectl delete deploy postgres sonarqube
+    kubectl delete svc postgres sonarqube
+    kubectl delete pvc postgres-pv-claim sonar-data sonar-extensions
+    kubectl delete pv postgres-pv-volume sonar-pv-data sonar-pv-extensions
+    kubectl delete configmaps sonar-config
+    kubectl delete secrets postgres-secrets
