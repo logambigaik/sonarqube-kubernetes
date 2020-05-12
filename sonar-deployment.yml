@@ -35,7 +35,7 @@ spec:
           - name: "SONARQUBE_JDBC_URL"
             valueFrom:
               configMapKeyRef:
-                name: postgres-config
+                name: sonar-config
                 key: url
           - name: "SONARQUBE_JDBC_PASSWORD"
             valueFrom:
