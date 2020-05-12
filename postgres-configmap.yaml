@@ -5,5 +5,4 @@ metadata:
   labels:
     app: postgres
 data:
-  POSTGRES_USER: postgresadmin
-  POSTGRES_PASSWORD: admin123
+  url: jdbc:postgresql://postgres:5432/postgres

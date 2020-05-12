@@ -29,16 +29,19 @@ spec:
           env:
           - name: "SONARQUBE_JDBC_USERNAME"
             valueFrom:
-              configMapKeyRef:
-                name: postgres-config
-                key: POSTGRES_USER        
+               secretKeyRef:
+                 name: postgres-secrets
+                 key: username
           - name: "SONARQUBE_JDBC_URL"
-            value: "jdbc:postgresql://postgres:5432/postgresdb"
-          - name: "SONARQUBE_JDBC_PASSWORD"
             valueFrom:
               configMapKeyRef:
-                name: postgres-config    
-                key: POSTGRES_PASSWORD
+                name: postgres-config
+                key: url
+          - name: "SONARQUBE_JDBC_PASSWORD"
+            valueFrom:
+               secretKeyRef:
+                 name: postgres-secrets
+                 key: password
           ports:
           - containerPort: 9000
             protocol: TCP
